@@ -1,7 +1,7 @@
 #ifndef MAV2SPEKTRUM_H_
 #define MAV2SPEKTRUM_H_
 
-#include <Time.h>
+#include <TimeLib.h>
 
 #define TELEMETRY_SPEED 115200
 
