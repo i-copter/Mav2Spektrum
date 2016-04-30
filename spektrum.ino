@@ -52,7 +52,7 @@ void SpektrumSensorRequest()
 
 #ifdef SpektrumSlaveI2C_IHIGH_CURRENT
 		case SpektrumSlaveI2C_IHIGH_CURRENT :
-			SpektrumTelemetry_IHigh.current =  swap_int16(battCurrent / 0.196791); // / 0.196791
+			SpektrumTelemetry_IHigh.current =  swap_int16((battCurrent / 0.196791F) / 1000); // / 0.196791
 			memcpy(&SpektrumTelemetryBuffer, &SpektrumTelemetry_IHigh, sizeof(SpektrumTelemetry_IHigh));
 		break;
 #endif

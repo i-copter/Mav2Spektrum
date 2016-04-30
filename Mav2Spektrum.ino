@@ -26,13 +26,9 @@
 #include "Mav2Spektrum.h"
 
 void setup() {
-		Serial.begin(115200);
-		Serial.println("Startup....");
+		Serial1.begin(TELEMETRY_SPEED);
 		pinMode(13, OUTPUT);
-		Serial.println("Initialize Spektrum i2c...");
 	    spektrumInit();
-	    Serial1.begin(TELEMETRY_SPEED);
-
 }
 
 

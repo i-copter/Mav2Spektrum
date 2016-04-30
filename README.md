@@ -12,5 +12,9 @@ The Spektrum Telemetry protocol and pinouts can be found at http://www.spektrumr
 
 Change Serial1 to Serial for USB connectivity instead of hardware serial port... useful for interfaces with USB such as the RaspberryPi flight controllers (Navio+, Navio2, Erie, etc...)
 
+##Known Issues / TODO:
+
+1. Fix gps time -- currently mavlink return a 64bit value...
+2. Update GPS coordinates -- TODO
 
 
