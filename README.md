@@ -15,7 +15,7 @@ Change Serial1 to Serial for USB connectivity instead of hardware serial port...
 
 Known Issues / TODO:
 
-1. Fix gps time -- currently mavlink return a 64bit value
+1. Fix gps time -- currently mavlink return a 64bit value -- Fixed.. however ArduPilot returns the time since boot...
 2. update GPS coordinates -- TODO
 
 
