@@ -2,7 +2,7 @@
 
 Mavlink protocol to Spektrum TM1000 telemetry module
 
-This project converts mavlink protocol to Spektrums i2c telemetry TM1000 module using a Teensy 3.2 32-bit Arduino compatable module from PJRC.
+This project converts mavlink protocol to Spektrums i2c telemetry TM1000 module using a Teensy 3.2 32-bit Arduino compatable module from PJRC.  This version does not rely on the FastSerial implementation and only uses the native serial I/O class.
 
 Serial connection to mavlink is via pins 0(RX1)
 i2c connection to Spektrum TM1000 module is via 19(SCL) and 18(SDA)
@@ -12,9 +12,10 @@ The Spektrum Telemetry protocol and pinouts can be found at http://www.spektrumr
 
 Change Serial1 to Serial for USB connectivity instead of hardware serial port... useful for interfaces with USB such as the RaspberryPi flight controllers (Navio+, Navio2, Erie, etc...)
 
-##Known Issues / TODO:
 
-1. Fix gps time -- currently mavlink return a 64bit value...
-2. Update GPS coordinates -- TODO
+Known Issues / TODO:
+
+1. Fix gps time -- currently mavlink return a 64bit value
+2. update GPS coordinates -- TODO
 
 
