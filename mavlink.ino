@@ -9,7 +9,6 @@ mavlink_status_t status;
 static int packet_drops = 0;
 static int parse_error = 0;
 
-long timet=0;
 
 void receive_mavlink(){
 
@@ -22,11 +21,13 @@ if (Serial1.available()){
 
 			case MAVLINK_MSG_ID_GPS_RAW_INT:
 				gps_sats = mavlink_msg_gps_raw_int_get_satellites_visible(&msg);
-				gps_time = mavlink_msg_gps_raw_int_get_time_usec(&msg);
-				//Serial.printf("%u\n",gps_time);
-				//Serial.println(timet);
-				breakTime(gps_time, timeE);
-				//Serial.printf("HH:%d MM:%d SS:%d\n",timeE.Hour,timeE.Minute,timeE.Second);
+				gps_time = (mavlink_msg_gps_raw_int_get_time_usec(&msg)) / 1e6;  // This is actually the time from boot... fix required in mavlink and APM
+				gps_hdop = mavlink_msg_gps_raw_int_get_eph(&msg);
+				gps_course = mavlink_msg_gps_raw_int_get_cog(&msg);
+				gps_speed = mavlink_msg_gps_raw_int_get_vel(&msg) / 100;
+				gps_alt = (uint16_t)mavlink_msg_gps_raw_int_get_alt(&msg) / 1000;
+				breakTime(gps_time, tmGpsTime);
+
 				break;
 
 			case MAVLINK_MSG_ID_VFR_HUD:

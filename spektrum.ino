@@ -25,7 +25,6 @@
 #include "spektrum.h"
 #include <i2c_t3.h>
 
-
 uint8_t SpektrumTelemetryBuffer[16];
 uint16_t i=0;
 
@@ -126,20 +125,22 @@ void SpektrumSensorRequest()
 
 #ifdef	SpektrumSlaveI2C_GPS_LOC
 		case SpektrumSlaveI2C_GPS_LOC :
-
+			SpektrumTelemetry_GpsLoc.HDOP = decToBcd((uint8_t)gps_hdop);
+			SpektrumTelemetry_GpsLoc.course = decToBcd((uint8_t)gps_course);
+			SpektrumTelemetry_GpsLoc.altitudeLow = decToBcd((uint16_t)1);
+			memcpy(&SpektrumTelemetryBuffer, &SpektrumTelemetry_GpsLoc, sizeof(SpektrumTelemetry_GpsLoc));
 		break;
 #endif
 
 #ifdef 	SpektrumSlaveI2C_GPS_STATS
 		case SpektrumSlaveI2C_GPS_STATS :
 			SpektrumTelemetry_GpsStat.numSats = decToBcd(gps_sats);
-			SpektrumTelemetry_GpsStat.altitudeHigh = decToBcd(gps_alt);
-			SpektrumTelemetry_GpsStat.UTC_HH = decToBcd(timeE.Hour);
-			SpektrumTelemetry_GpsStat.UTC_MM = decToBcd(timeE.Minute);
-			SpektrumTelemetry_GpsStat.UTC_SS = decToBcd(timeE.Second);
-			SpektrumTelemetry_GpsStat.UTC_MS = decToBcd(0);
-			//SpektrumTelemetry_GpsStat.speed = udecToBcd((100 * 10) / 1.852);  // / 0.1852
-			SpektrumTelemetry_GpsStat.speed = udecToBcd(100 * 10); // value is in knots
+			SpektrumTelemetry_GpsStat.altitudeHigh = 0;
+			SpektrumTelemetry_GpsStat.UTC_HH = decToBcd(tmGpsTime.Hour);	//Note this is time from start of APM... fix require to APM & mavlink
+			SpektrumTelemetry_GpsStat.UTC_MM = decToBcd(tmGpsTime.Minute);
+			SpektrumTelemetry_GpsStat.UTC_SS = decToBcd(tmGpsTime.Second);
+			SpektrumTelemetry_GpsStat.UTC_MS = decToBcd((uint8_t) 0);
+			SpektrumTelemetry_GpsStat.speed = decToBcd((uint16_t)(gps_speed * 1.94384F)); // value is in m/s convert to knots
 			memcpy(&SpektrumTelemetryBuffer, &SpektrumTelemetry_GpsStat, sizeof(SpektrumTelemetry_GpsStat));
 		break;
 #endif
