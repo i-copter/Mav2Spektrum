@@ -27,6 +27,7 @@
 
 void setup() {
 		Serial1.begin(TELEMETRY_SPEED);
+		Serial.begin(115200);  //Debug Port
 		pinMode(13, OUTPUT);
 	    spektrumInit();
 }

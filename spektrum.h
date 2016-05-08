@@ -636,17 +636,33 @@ struct
 	const uint8_t id = SpektrumSlaveI2C_GPS_LOC; // Source device = 0x16
 	uint8_t sID; // Secondary ID
 	uint16_t altitudeLow; // BCD, meters, format 3.1 (Low bits of alt)
-	uint16_t latitude_MSB;	// BCD, format 4.4
-	uint16_t latitude_LSB;
 	// Degrees * 100 + minutes, < 100 degrees
-	uint16_t longitude_MSB;	// BCD, format 4.4
-	uint16_t longitude_LSB;
+	//uint32_t longitude;	// BCD, format 4.4
+	uint8_t	subSecLat;
+	uint8_t	degSecLat;
+	uint8_t degMinLat;
+	uint8_t degLat;
+	//uint32_t longitude;
+	uint8_t subSecLon;
+	uint8_t degSecLon;
+	uint8_t degMinLon;
+	uint8_t degLon;
 	// Degrees * 100 + minutes, flag --> > 99deg
 	uint16_t course; // BCD, 3.1
 	uint8_t HDOP; // BCD, format 1.1
 	uint8_t GPSflags; // see definitions below
 } SpektrumTelemetry_GpsLoc;
 #endif
+
+//			uint8_t subSecLat;      /* 4  subSecLat */
+//			  uint8_t degSecLat;      /* 5  degSecLat */
+//			  uint8_t degMinLat;      /* 6  degMinLat */
+//			  uint8_t degLat;         /* 7  degLat */
+//			  uint8_t subSecLon;      /* 8  subSecLon */
+//			  uint8_t degSecLon;      /* 9  degSecLon */
+//			  uint8_t degMinLon;      /* 10 degMinLon */
+//			  uint8_t degLon;         /* 11 degLon */
+
 
 #ifdef SpektrumSlaveI2C_GPS_STATS
 struct
